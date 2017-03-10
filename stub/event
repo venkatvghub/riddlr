@@ -17,7 +17,7 @@ An event's metadata should be defined as a JSON document.
         * footer:   Footer text (social media, contacts, etc.).             [~]
 
 
-    level: [%]
+    level:                                                                  [%]
         * index:    The level number; routing follows the same order.       [!]
         * title:    The title text to be displayed on the level.            [~]
         * text:     The textual content (actual question) for the level.    [~]
