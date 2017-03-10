@@ -47,14 +47,14 @@ An event's metadata should be defined as a JSON document.
     example:
                 {
                     "name": "foo",
-                    "start": XXXXXXXXXX,
+                    "start": 1234567890,
                     "end": null,
                     "intro": "spam",
                     "faq": "eggs",
                     "footer": "fred",
                     "levels": [
                         {
-                            "index": N,
+                            "index": 0,
                             "title": "bar",
                             "text": "baz",
                             "media": {
@@ -65,7 +65,7 @@ An event's metadata should be defined as a JSON document.
                                 "choices": [
                                     "corge",
                                     "grault"
-                                ]
+                                ],
                                 "case": true,
                                 "hints": [
                                     {
