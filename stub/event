@@ -34,16 +34,14 @@ reference
                         - path:     The URI path to display
                                     (used for redirections). [~]
 
+    legend
+        [~]: string
+        [!]: integer
+        [^]: list
+        [%]: list of mappings
+        [-]: boolean
+        [#]: mapping
 
-legend
-------
-
-    [~]: string
-    [!]: integer
-    [^]: list
-    [%]: list of mappings
-    [-]: boolean
-    [#]: mapping
 
 example
 -------
