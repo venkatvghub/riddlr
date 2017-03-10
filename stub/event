@@ -52,10 +52,13 @@ An event's metadata should be defined as a JSON document.
                             "text": "baz",
                             "media": {
                                 "type": "qux",
-                                "url": ""
+                                "url": "http://wibble/wobble"
                             },
                             "answer": {
-                                "choices": ["corge", "grault"]
+                                "choices": [
+                                    "corge",
+                                    "grault"
+                                ]
                                 "case": true,
                                 "hints": [
                                     {
