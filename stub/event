@@ -12,6 +12,10 @@ An event's metadata should be defined as a JSON document.
                     (if not applicable, use `null`). [!]
         * end:      The event's end time (if not applicable, use `null`). [!]
         * levels:   A list of `level` objects. [%]
+        * intro:    Description of the event (can be HTML embeds). [~]
+        * faq:      FAQ (common instructions, can be HTML embeds) [~]
+        * footer:   Footer text (social media, contacts, etc.) [~]
+
 
     level: [%]
         * index:    The level number; routing follows the same order. [!]
@@ -45,6 +49,9 @@ An event's metadata should be defined as a JSON document.
                     "name": "foo",
                     "start": XXXXXXXXXX,
                     "end": null,
+                    "intro": "spam",
+                    "faq": "eggs",
+                    "footer": "fred",
                     "levels": [
                         {
                             "index": N,
