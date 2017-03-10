@@ -5,7 +5,7 @@ This document describes what an event looks like.
 An event's metadata should be defined as a JSON document.
 
 
-    event: [#]
+    meta: [#]
         * name:     The name of the event. [~]
         * start:    The event's start time (when it goes live).
                     Should be defined as a UTC timestamp
