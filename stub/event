@@ -7,8 +7,8 @@ An event's metadata should be defined as a JSON document.
 
     meta:                                                                   [#]
         * name:     The name of the event.                                  [~]
-        * start:    The event's start time (when it goes live).
-                    Should be defined as a UTC timestamp                    [!]
+        * start:    The event's start time (when it goes live).             [!]
+                    Should be defined as a UTC timestamp
                     (if not applicable, use `null`).
         * end:      The event's end time (if not applicable, use `null`).   [!]
         * levels:   A list of `level` objects. [%]
@@ -27,7 +27,7 @@ An event's metadata should be defined as a JSON document.
                         - url:  The URL to fetch from, local references     [~]
                                 (URI) will not be supported.
         * answer:   The answer to a level.                                  [#]
-                        - choices: An accepted set of answers.              [^]
+                        - choices:  An accepted set of answers.             [^]
                         - case:     Flag for case-sensitivity.              [-]
                         - hints:    Display a text based hint.              [%]
                         - source:   A hint to display in the source page,   [~]
