@@ -1,0 +1,106 @@
+body {
+    font-size: 18px;
+    font-family: 'Overpass', sans-serif;
+}
+
+.user-header, .level-container {
+    width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.user-header {
+    text-align: right;
+}
+
+.level-container {
+    height: 680px;
+    border: 1px dotted black;
+}
+
+.event-header {
+    font-size: 28px;
+    text-align: center;;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted black;
+}
+
+.question {
+    width: 65%;
+    display: inline-block;
+    float: left;
+    display: inline-block;
+    height: 550px;
+}
+
+#track {
+    text-align: center;
+    width: 33%;
+    float: right;
+    display: inline-block;
+    height: 85%;
+    overflow: scroll;
+}
+
+#tracker {
+    margin: 0 auto;
+}
+
+.hint {
+    width: 100%;
+    height: 14px;
+    font-size: 11px;
+    text-align: center;
+    color: darkgreen;
+}
+
+.text {
+    margin: auto;
+    font-size: 16px;
+    text-align: center;
+    height: 65px;
+    width: 512px;
+}
+
+.media {
+    margin: auto;
+}
+
+input.answer-text {
+    font-weight: lighter;
+    width: 260px;
+    height: 20px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    text-decoration: none;
+    border: 1px solid silver;
+    font-family: 'Overpass', sans-serif;
+
+}
+
+input.submit-box[type="submit"] {
+    border: none;
+    outline: none;
+    width: 60px;
+    height: 24px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: lighter;
+    text-decoration: none;
+    font-family: 'Overpass', sans-serif;
+    vertical-align: -1px;
+}
+
+input.submit-box[type="submit"]:hover {
+    color: white;
+    background: black;
+    font-weight: lighter;
+}
+
+.current-user {
+    background-color: black;
+    color: white;
+}

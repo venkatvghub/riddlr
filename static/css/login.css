@@ -1,0 +1,100 @@
+body {
+    font-size: 32px;
+    font-family: 'Overpass', sans-serif;
+}
+
+.login-header {
+    font-size: 48px;
+    text-align: center;
+}
+
+.login-form-container {
+    margin: auto;
+    width: 460px;
+    height: 320px;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+.register-form-container {
+    margin: auto;
+    width: 460px;
+    height: 600px;
+    padding: 20px;
+    margin-top: 60px;
+}
+
+.login-form-input {
+    float: left;
+    width: 300px;
+    height: 200px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.login-form-submit {
+    float: right;
+    width: 150px;
+    height: 186px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.reg-form-submit {
+    float: right;
+    width: 150px;
+    height: 480px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.login-item-text {
+    color: black;
+    font-size: 16px;
+}
+
+input.login-form-text-input {
+    font-weight: lighter;
+    width: 260px;
+    height: 18px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    text-decoration: none;
+    border-bottom: 1px solid silver;
+    font-family: 'Overpass', sans-serif;
+}
+
+input.login-form-submit-button[type="submit"] {
+    border: none;
+    outline: none;
+    width: inherit;
+    height: inherit;
+    font-size: 22px;
+    text-align: center;
+    font-weight: lighter;
+    text-decoration: none;
+    font-family: 'Overpass', sans-serif;
+}
+
+input.login-form-submit-button[type="submit"]:hover {
+    color: white;
+    background: black;
+    font-weight: lighter;
+}
+
+#login-error {
+    width: 100%;
+    margin: 0 auto;
+    color: crimson;
+    font-size: 16px;
+    text-align: center;
+}
+
+#register-success {
+    width: 100%;
+    margin: 0 auto;
+    color: darkgreen;
+    font-size: 16px;
+    text-align: center;
+}

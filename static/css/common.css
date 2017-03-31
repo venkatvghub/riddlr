@@ -1,0 +1,57 @@
+.footer {
+    margin: 0 auto;
+    color: black;
+    font-size: 14px;
+    text-align: center;
+    font-family: 'Overpass', sans-serif;
+}
+
+.link-footer-ref {
+    color: black;
+    text-decoration: none;
+}
+
+.link-footer-ref:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.finish-message {
+    font-family: 'Overpass', sans-serif;
+    text-align: center;
+    font-size: 22px;
+    margin: auto;
+    margin-top: 100px;
+    height: 200px;
+    width: 700px;
+    align-items: center;
+}
+
+.intro-message {
+    width: 720px;
+    margin: auto;
+    text-align: center;
+    font-family: 'Overpass', sans-serif;
+}
+
+.main-header {
+    font-size: 48px;
+    width: 720px;
+    margin: 0 auto;
+    margin-top: 200px;
+    text-align: center;
+    font-family: 'Overpass', sans-serif;
+}
+
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+
+.error-box {
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 400px;
+    text-align: center;
+    font-family: 'Overpass', sans-serif;
+}
