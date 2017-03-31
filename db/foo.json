@@ -1,0 +1,73 @@
+{
+    "id": "foo",
+    "name": "The Foo Online Treasure Hunt",
+    "start": 1400000000,
+    "intro": "A treasure hunt is one of many different types of games with one or more players who try to find hidden objects or places by following a series of clues. Treasure hunt games may be an indoor or outdoor activity. Outdoors they can be played in a garden or the treasure could be located anywhere around the world.",
+    "social": "https://example.com/example-company",
+    "host": "example-company",
+    "faq": "https://example.com/example-oth/faq",
+    "discuss": "https://example.com/example-oth/forums",
+    "finish": "",
+    "levels": [
+        {
+            "index": 1,
+            "title": "The Dark Knight",
+            "text": "Who am I?",
+            "media": {
+                "type": "img",
+                "url": "http://vignette1.wikia.nocookie.net/batmananimateduniverse/images/2/20/Batman_tnba_pic.jpg/revision/latest?cb=20120209204824"
+            },
+            "answer": {
+                "choices": [
+                    "BATMAN"
+                ],
+                "case": true,
+                "hints": []
+            },
+            "source": "Because we have to chase him. Because he's the hero Gotham deserves, but not the one it needs right now, so we'll hunt him. Because he can take it, because he's not a hero. He's a silent guardian, a watchful protector, a Dark Knight.",
+            "path": "dc/101"
+        },
+        {
+            "index": 2,
+            "title": "Don't change in phone booths.",
+            "text": "X is a fictional superhero appearing in American comic books published by DC Comics.",
+            "media": {
+                "type": "iframe",
+                "url": "https://www.youtube.com/embed/oCOet3CPaa4"
+            },
+            "answer": {
+                "choices": [
+                    "superman"
+                ],
+                "case": false,
+                "hints": [
+                    {
+                        "hint": "clark kent",
+                        "text": "I'm not him, but we've never been in the same room."
+                    }
+                ]
+            },
+            "source": "Kryptonite.",
+            "path": "lex"
+        },
+        {
+            "index": 3,
+            "title": "Sintel",
+            "text": "The what bunny?",
+            "media": {
+                "type": "video",
+                "url": "https://www.w3schools.com/html/mov_bbb.mp4"
+            },
+            "answer": {
+                "choices": [
+                    "big buck bunny",
+                    "the big buck bunny"
+                ],
+                "case": false,
+                "hints": []
+            },
+            "source": "Open.",
+            "path": "source"
+        }
+    ]
+}
