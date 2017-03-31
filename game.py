@@ -274,7 +274,7 @@ def login():
             'login.html', event=EVENT_DATA['name'],
             host=EVENT_DATA['host'], faq=EVENT_DATA['faq'],
             social=EVENT_DATA['social'], discuss=EVENT_DATA['discuss'],
-            error=False, reason='', next=redir
+            error=False, reason='', next=redir, year=YEAR
         )
 
 
