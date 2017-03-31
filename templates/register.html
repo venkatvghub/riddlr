@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Register - {{ event|safe }}</title>
+        <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <form class="register-form-container" method="post" action="/register">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <span class="login-header">register</span><br><br>
+            <div class="login-form">
+                <div class="login-form-input">
+                    <span class="login-item-text">e-mail</span><br>
+                    <input class="login-form-text-input" type="email" name="email" title="A valid e-mail address."><br>
+                    <span class="login-item-text">phone</span><br>
+                    <input class="login-form-text-input" type="text" name="phone" title="A valid phone number, 10 digits." pattern="^[2-9]{2}[0-9]{8}$"><br>
+                    <span class="login-item-text">username</span><br>
+                    <input class="login-form-text-input" type="text" name="uname" title="Must be unique, no spaces, all lower-case, 4 to 16 characters long." pattern="^[^\s]{4,16}$" ><br>
+                    <span class="login-item-text">password</span><br>
+                    <input class="login-form-text-input" type="password" name="pword" title="Must contain a minimum of four characters." pattern=".{4,}"><br>
+                    <span class="login-item-text">confirm-password</span><br>
+                    <input class="login-form-text-input" type="password" name="pword_c" title="Must contain a minimum of four characters." pattern=".{4,}"><br>
+                </div>
+                <div class="reg-form-submit"><input class="login-form-submit-button" type="submit" value="go"></div>
+            </div>
+        </form>
+        {% if error == True %}<div id="login-error">{{ reason }}</div>{% endif %}
+        {% if reg == True %}<div id="register-success">{{ reason }}<br>Please <a href="/login" class="link-footer-ref">login</a> to play.</div>{% endif %}
+        <div class="footer">&copy;&nbsp;{{ year|safe }}&nbsp;<a class="link-footer-ref" href="{{ social|safe }}" target="_blank">{{ host|safe }}</a>&nbsp;-&nbsp;<a class="link-footer-ref" href="/" target="_blank">home</a>&nbsp;-&nbsp;<a class="link-footer-ref" href="{{ faq|safe }}" target="_blank">faq</a>&nbsp;-&nbsp;<a class="link-footer-ref" href="{{ discuss|safe }}" target="_blank">forum</a>&nbsp;-&nbsp;<a class="link-footer-ref" href="/login" target="_blank">login</a></div>
+    </body>
+</html>

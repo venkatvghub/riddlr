@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/level.css') }}" rel="stylesheet">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/trackr.js') }}"></script>
+        <title>#{{ level|safe }}: {{ title|safe }} - {{ event|safe }}</title>
+    </head>
+    <body>
+        <span id="username" hidden>{{ user|safe }}</span>
+        <div class="user-header">{{ user|safe }} - <a class="link-footer-ref" href="/logout">logout</a></div>
+        <br>
+        <div class="level-container">
+            <div class="event-header">{{ event|safe }}</div><br><br>
+            <div class="question">
+                <form class="question-form" method="POST">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                    <div class="answer-box">
+                        <input type="text" class="answer-text" name="answer" required>
+                        <input type="submit" class="submit-box" value="check">
+                    </div><br>
+                    {% if hint %}
+                    <div class="hint">{{ hint_text|safe }}</div>
+                    {% endif %}
+                </form>
+                <div class="text">{{ text|safe }}</div><br>
+                <!-- Here, have a cookie. [Hint]: {{ source | safe }} -->
+                <div class="media">
+                    <{{ media|safe }} src="{{ link|safe }}" width="512px" height="384px" frameborder="0" controls></{{ media|safe }}>
+                </div>
+            </div>
+            <div id="track">
+                <table id="tracker">
+                    <thead>
+                        <tr class="table-header">
+                            <th colspan="3">leaderboard</th>
+                        </tr>
+                        <tr class="table-sub-header">
+                            <th>pos.</th>
+                            <th>player</th>
+                            <th>level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-scores"></tbody>
+                </table>
+            </div>
+        </div>&nbsp;
+        <div class="footer">&copy;&nbsp;{{ year|safe }}&nbsp;<a class="link-footer-ref" href="{{ social|safe }}" target="_blank">{{ host|safe }}</a>&nbsp;-&nbsp;<a class="link-footer-ref" href="/" target="_blank">home</a>&nbsp;-&nbsp;<a class="link-footer-ref" href="{{ faq|safe }}" target="_blank">faq</a>&nbsp;-&nbsp;<a class="link-footer-ref" href="{{ discuss|safe }}" target="_blank">forum</a></div>
+    </body>
+</html>

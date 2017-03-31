@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ event|safe }}</title>
+        <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="main-header">{{ event|safe }}</div>
+        <br>
+        <div class="intro-message">{{ intro|safe }}<br><br><a class="link-footer-ref" href="/login">login</a> - <a class="link-footer-ref" href="/register">register</a></div>
+        <br>
+        <div class="footer">&copy;&nbsp;{{ year|safe }}&nbsp;<a class="link-footer-ref" href="{{ social|safe }}" target="_blank">{{ host|safe }}</a>&nbsp;-&nbsp;<a class="link-footer-ref" href="{{ faq|safe }}" target="_blank">faq</a>&nbsp;-&nbsp;<a class="link-footer-ref" href="{{ discuss|safe }}" target="_blank">forum</a></div>
+    </body>
+</html>
