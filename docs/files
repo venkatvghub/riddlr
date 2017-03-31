@@ -1,0 +1,135 @@
+FILES
+-----
+
+This document defines the required files, directories to setup an instance
+of the application.
+
+
+CONFIGURATION
+-------------
+
+    [+] config.json - This contains the application configuration.
+
+    DO NOT CHECK THIS FILE INTO THE REPOSITORY.
+    USE ENVIRONMENT VARIABLES FOR BETTER SECURITY.
+
+    {
+        "event": "event-id",
+        "trackr": leaderboard-display-limit,
+        "dbpath": "db/file-containing-the-event-database",
+        "sudo": "password-for-remote-administrator-access",
+        "secret": "application-secret-for-logins-and-sessions"
+    }
+
+
+    * event:    The current event ID.
+    * trackr:   The number of players to show on the leaderboard.
+    * dbpath:   The path containing the initialized database.
+                (refer to the `DATABASE` section for more details)
+    * sudo:     This is the value for `X-Auth-Token`, a custom HTTP
+                header for verifying administrator access.
+                (refer to `ADMINISTRATION` section for more details)
+    * secret:   The application secret. This is used to generate session
+                cookies, CSRF tokens for login and form submissions.
+
+
+
+
+ADMINISTRATION
+--------------
+
+    [+] stats.py - Remote (read-only) administrator access for viewing events
+                   and users on the current database. It issues an HTTP GET
+                   to the `/sudo` URL route on the server.
+
+                   This script uses the `X-Auth-Token` custom HTTP header to
+                   verify credentials.
+
+        usage: stats.py [-h] -s SERVER {users,events} ...
+
+        Fetch stats from the game database.
+
+        optional arguments:
+        -h, --help            show this help message and exit
+        -s SERVER, --server SERVER
+                           hostname[:port] of the API server
+
+        subcommands:
+        operations on tables
+
+        {users,events}        sub-commands that can be chosen from
+
+
+
+DATABASE
+--------
+
+    The game database contains two tables -- users, events to store the
+    user information and event data respectively.
+
+    MANUAL CHANGES FOR USERS MUST BE DONE USING QUERIES ON THE DATABASE.
+    FOR EVENTS, `dba.py` can be used to update information.
+
+    BOTH OF THE ABOVE ACTIONS SHOULD BE RUN ON THE APPLICATION SERVER.
+
+
+    [+] db/* -      Usually contains `*.json` -- the event files, and `*.db` --
+                    the database files. This application uses sqlite3 for
+                    minimal overhead. It is recommended to use one database
+                    per event.
+
+                    The value for `event`, `dbpath` in `config.json` must be
+                    identical to the path/ID of the current event.
+
+
+    [+] dba.py -    This script is used to create an empty database
+                    with pre-defined schema.
+
+
+        usage: dba.py [-h] -a {init,load} -db DATABASE_PATH [-c] [-f FROM_FILE]
+
+        Interface for game database administration.
+
+        optional arguments:
+          -h, --help            show this help message and exit
+          -a {init,load}, --action {init,load}
+                                init: initialize an empty database;
+                                load: insert (or update) an event to (on)
+                                the database
+          -db DATABASE_PATH, --database-path DATABASE_PATH
+                                path to load/save the database from/to
+          -c, --current         mark event as active (and the rest inactive)
+          -f FROM_FILE, --from-file FROM_FILE
+                                file to load event data from
+
+
+    [+] schema
+
+        * events
+
+            CREATE TABLE IF NOT EXISTS game.events
+                (
+                    id        TEXT NOT NULL UNIQUE,
+                    data      TEXT NOT NULL,
+                    current   BOOL DEFAULT 0,
+                    timestamp DATE
+                )
+
+        * users
+
+            CREATE TABLE IF NOT EXISTS game.users
+                (
+                    id          TEXT NOT NULL UNIQUE,
+                    password    TEXT NOT NULL,
+                    event       TEXT NOT NULL,
+                    level       INTEGER NOT NULL DEFAULT -1,
+                    email       TEXT NOT NULL,
+                    phone       TEXT NOT NULL,
+                    ban         BOOL DEFAULT 0,
+                    timestamp   DATE
+                )
+
+
+NOTES
+
+    [+] A player will be logged out if he is flagged as `ban`.

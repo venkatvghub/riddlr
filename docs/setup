@@ -1,0 +1,66 @@
+SETUP
+-----
+
+This application runs on Flask and uses Gunicorn as a WSGI HTTP Server.
+
+    [+] The minimum requirements include a GNU/Linux distrubution with
+        python-2.7 installed. Optionally, you can use virtualenv for
+        testing and development.
+
+
+CLONING
+-------
+
+    Clone this repository locally, where the application should run.
+
+    $ git clone https://github.com/clickyotomy/riddlr
+
+
+DEPENDENCIES
+------------
+
+    This application depends on third party Python libraries, which are
+    present in `requirements.txt` in the root of this directory.
+
+    To install dependencies, use pip.
+
+    $ pip install -r requirements.txt
+
+
+SERVER
+------
+
+    Before you start a server, please refer to `docs/config` for configuring
+    the application.
+
+    [+] Local development, testing - Set `debug` (in app.run()) and
+        the global variable `ENV_DEV` to `True`.
+
+        $ python2.7 game.py
+
+        ^C quits the server.
+
+    [+] For production, make sure that `debug` and `ENV_DEV` are set to false.
+
+        * To run a simple Flask server (with threading), set `threaded=True`
+          in app.run() [Not recommended].
+
+          $ python2.7 game.py
+
+          `^C` quits the server (in case of problems with threading,
+                               run `kill -{9,15} PID`).
+
+
+        * To run the Flask application, behind a WSGI (Gunicorn, in this case),
+          run the script `start.sh` (as root if you want to run on port 80).
+
+          $ ./start.sh (from the application root).
+
+          To kill the server, run `[sudo] killall gunicorn`.
+
+
+CAVEATS
+-------
+
+    [+] Do no check in db/* or config.json into the git repository.
+        A better option would be to add it to gitignore.
