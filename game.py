@@ -345,16 +345,28 @@ def level(path):
                 source=data['source']
             )
 
-    return render_template(
-        'level.html',
-        year=YEAR, event=EVENT_DATA['name'],
-        host=EVENT_DATA['host'], faq=EVENT_DATA['faq'],
-        social=EVENT_DATA['social'], discuss=EVENT_DATA['discuss'],
-        user=current_user.id, media=data['media']['type'],
-        link=data['media']['url'], hint=False, hint_text='',
-        text=data['text'], level=level_index, title=data['title'],
-        source=data['source']
-    )
+        return render_template(
+            'level.html',
+            year=YEAR, event=EVENT_DATA['name'],
+            host=EVENT_DATA['host'], faq=EVENT_DATA['faq'],
+            social=EVENT_DATA['social'], discuss=EVENT_DATA['discuss'],
+            user=current_user.id, media=data['media']['type'],
+            link=data['media']['url'], hint=False, hint_text='',
+            text=data['text'], level=level_index, title=data['title'],
+            source=data['source']
+        )
+
+    else:
+        return render_template(
+            'level.html',
+            year=YEAR, event=EVENT_DATA['name'],
+            host=EVENT_DATA['host'], faq=EVENT_DATA['faq'],
+            social=EVENT_DATA['social'], discuss=EVENT_DATA['discuss'],
+            user=current_user.id, media=data['media']['type'],
+            link=data['media']['url'], hint=False, hint_text='',
+            text=data['text'], level=level_index, title=data['title'],
+            source=data['source']
+        )
 
 
 @app.route('/congratulations')
