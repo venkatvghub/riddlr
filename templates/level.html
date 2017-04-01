@@ -26,10 +26,12 @@
                     {% endif %}
                 </form>
                 <div class="text">{{ text|safe }}</div><br>
-                <!-- Here, have a cookie. [Hint]: {{ source | safe }} -->
+                <!-- Here, have a cookie. #{{ source | safe }} -->
+                {% if media != None %}
                 <div class="media">
-                    <{{ media|safe }} src="{{ link|safe }}" width="512px" height="384px" frameborder="0" controls></{{ media|safe }}>
+                    <{{ media['type']|safe }} src="{{ media['url']|safe }}" width="512px" height="384px" frameborder="0" controls></{{ media['type']|safe }}>
                 </div>
+                {% endif %}
             </div>
             <div id="track">
                 <table id="tracker">
