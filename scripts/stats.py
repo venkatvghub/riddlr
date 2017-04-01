@@ -3,6 +3,14 @@
 '''
 stats.py: Fetch stats from the database.
 '''
+__author__ = "Srinidhi Kaushik"
+__copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
+__license__ = "MIT"
+__version__ = "0.2"
+__maintainer__ = "Srinidhi Kaushik"
+__email__ = "clickyotomy@"
+__status__ = "Production"
+
 
 import re
 import time

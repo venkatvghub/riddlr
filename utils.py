@@ -7,7 +7,7 @@ Helper modules for the web-app.
 __author__ = "Srinidhi Kaushik"
 __copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
 __license__ = "MIT"
-__version__ = "0.1"
+__version__ = "0.2"
 __maintainer__ = "Srinidhi Kaushik"
 __email__ = "clickyotomy@"
 __status__ = "Production"
