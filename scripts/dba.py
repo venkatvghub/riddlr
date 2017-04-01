@@ -7,9 +7,9 @@ dba.py: Database administration; CRUD operations on events and users.
 __author__ = "Srinidhi Kaushik"
 __copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
 __license__ = "MIT"
-__version__ = "0.2"
+__version__ = "0.3"
 __maintainer__ = "Srinidhi Kaushik"
-__email__ = "clickyotomy@users.noreply.github.com
+__email__ = "clickyotomy@users.noreply.github.com"
 __status__ = "Production"
 
 
