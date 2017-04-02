@@ -14,15 +14,15 @@
             <div class="login-form">
                 <div class="login-form-input">
                     <span class="login-item-text">e-mail</span><br>
-                    <input class="login-form-text-input" type="email" name="email" title="A valid e-mail address."><br>
+                    <input class="login-form-text-input" type="email" name="email" title="A valid e-mail address." required><br>
                     <span class="login-item-text">phone</span><br>
-                    <input class="login-form-text-input" type="text" name="phone" title="A valid phone number, 10 digits." pattern="^[2-9]{2}[0-9]{8}$"><br>
+                    <input class="login-form-text-input" type="text" name="phone" title="A valid phone number, 10 digits." pattern="^[2-9]{2}[0-9]{8}$" required><br>
                     <span class="login-item-text">username</span><br>
-                    <input class="login-form-text-input" type="text" name="uname" title="Must be unique, no spaces, all lower-case, 4 to 16 characters long." pattern="^[^\s]{4,16}$" ><br>
+                    <input class="login-form-text-input" type="text" name="uname" title="Must be unique, no spaces, all lower-case, 4 to 16 characters long." pattern="^[^\s]{4,16}$" required><br>
                     <span class="login-item-text">password</span><br>
-                    <input class="login-form-text-input" type="password" name="pword" title="Must contain a minimum of four characters." pattern=".{4,}"><br>
+                    <input class="login-form-text-input" type="password" name="pword" title="Must contain a minimum of four characters." pattern=".{4,}" required><br>
                     <span class="login-item-text">confirm-password</span><br>
-                    <input class="login-form-text-input" type="password" name="pword_c" title="Must contain a minimum of four characters." pattern=".{4,}"><br>
+                    <input class="login-form-text-input" type="password" name="pword_c" title="Must contain a minimum of four characters." pattern=".{4,}" required><br>
                 </div>
                 <div class="reg-form-submit"><input class="login-form-submit-button" type="submit" value="go"></div>
             </div>

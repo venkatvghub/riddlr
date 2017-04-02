@@ -16,6 +16,7 @@ import re
 import time
 import json
 import argparse
+from datetime import datetime
 from operator import itemgetter
 
 import requests
@@ -99,7 +100,7 @@ def fetch(host, table, debug=False):
     except (requests.exceptions.RequestException) as _error:
         error = ': '.join([type(_error).__name__, str(_error)])
         if debug:
-            print 'error:\n{0}\n{1}\n'.format('-' * len(error), error)
+            print 'error:\n{}'.format(error)
 
     return None
 
@@ -123,10 +124,21 @@ def constraints(filters):
             response = [_ for _ in response if
                         filters['since'] <= _['timestamp'] <= filters['until']
                         ]
-            response = sorted(response, key=itemgetter('timestamp'),
-                              reverse=filters['reverse'])
+
+            response = sorted(response, key=itemgetter('level'), reverse=True)
+
+            if filters['reverse']:
+                response = sorted(
+                    response,
+                    key=itemgetter('timestamp'),
+                    reverse=filters['reverse']
+                )
             response = response[:filters['limit']]
 
+            for item in response:
+                item['timestamp'] = datetime.utcfromtimestamp(
+                                        item['timestamp']
+                                    )
             return response
 
 
