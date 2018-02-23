@@ -20,11 +20,14 @@ DEPENDENCIES
 ------------
 
     This application depends on third party Python libraries, which are
-    present in `requirements.txt` in the root of this directory.
+    present in `requirements.txt' in the root of this directory.
+
+    To install sqlite, use the default package manager on your Linux
+    distribution. For example, in RedHat:
+        $ yum install sqlite
 
     To install dependencies, use pip.
-
-    $ pip install -r requirements.txt
+        $ pip install -r requirements.txt
 
 
 SERVER
