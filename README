@@ -6,4 +6,4 @@ A generic online treasure hunt framework.
 For reference, documentation and setup instructions, please go through
 all the files under `docs/`.
 
-This application runs on `gunicorn` backed by `flask` and `sqlite3`.
+This application runs on `gunicorn' backed by `flask' and `sqlite3'.
