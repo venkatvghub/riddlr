@@ -4,6 +4,12 @@
 Helper modules for the web-app.
 '''
 
+import time
+import json
+from urlparse import urlparse, urljoin
+
+import argon2
+
 __author__ = "Srinidhi Kaushik"
 __copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
 __license__ = "MIT"
@@ -13,20 +19,13 @@ __email__ = "clickyotomy@users.noreply.github.com"
 __status__ = "Production"
 
 
-import time
-import json
-from urlparse import urlparse, urljoin
-
-import argon2
-
-
 # Application configuration path.
 APP_CONFIG_PATH = './config.json'
 
 
 def load_config():
     '''
-    Load configuration variables from `config.json`.
+    Load configuration variables from `config.json'.
     '''
     try:
         with open(APP_CONFIG_PATH, 'r') as config:
@@ -223,7 +222,7 @@ def trackr(cursor, limit):
 
 def admin(cursor, table):
     '''
-    Fetch all the data from `users` database.
+    Fetch all the data from `users' database.
     '''
     if table == 'users':
         return cursor.execute(

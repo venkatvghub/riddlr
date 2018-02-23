@@ -4,15 +4,6 @@
 game.py: Server-side logic for riddlr.
 '''
 
-__author__ = "Srinidhi Kaushik"
-__copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
-__license__ = "MIT"
-__version__ = "0.2"
-__maintainer__ = "Srinidhi Kaushik"
-__email__ = "clickyotomy@users.noreply.github.com."
-__status__ = "Production"
-
-
 import json
 import time
 import sqlite3
@@ -37,6 +28,16 @@ from utils import (
     admin, is_banned
 )
 
+
+__author__ = "Srinidhi Kaushik"
+__copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
+__license__ = "MIT"
+__version__ = "0.2"
+__maintainer__ = "Srinidhi Kaushik"
+__email__ = "clickyotomy@users.noreply.github.com."
+__status__ = "Production"
+
+
 # Application configuration path.
 APP_CONFIG_PATH = './config.json'
 
@@ -54,7 +55,7 @@ class User(UserMixin):
 # Load application configuration.
 def load_config():
     '''
-    Load configuration variables from `config.json`.
+    Load configuration variables from `config.json'.
     '''
     try:
         with open(APP_CONFIG_PATH, 'r') as config:
@@ -64,7 +65,7 @@ def load_config():
         exit(1)
 
 
-# Variable for development environemnt (set to `False` in production).
+# Variable for development environemnt (set to `False' in production).
 ENV_DEV = True
 
 # Application configuration variables.
@@ -90,10 +91,10 @@ def get_db():
     '''
     Use database in the application cntext.
     '''
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(APP_CONFIG['dbpath'])
-    return db
+    database = getattr(g, '_database', None)
+    if database is None:
+        database = g._database = sqlite3.connect(APP_CONFIG['dbpath'])
+    return database
 
 
 # Load the event data.
@@ -106,13 +107,16 @@ def teardown_db(_):
     '''
     Teardown sequence.
     '''
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
+    database = getattr(g, '_database', None)
+    if database is not None:
+        database.close()
 
 
 # Custom exception class.
 class GameException(Exception):
+    '''
+    Custom exception class.
+    '''
     pass
 
 
@@ -188,10 +192,10 @@ def register():
                 )
                 get_db().commit()
             else:
-                reason = 'Username `{}` is already taken.'.format(uname)
+                reason = 'Username `{}\' is already taken.'.format(uname)
                 raise GameException
 
-            reason = 'Successfully registered `{}`.'.format(uname)
+            reason = 'Successfully registered `{}\'.'.format(uname)
 
         except GameException:
             return render_template(
@@ -442,6 +446,9 @@ def forbidden(error):
 
 @app.errorhandler(401)
 def unauthorized(error):
+    '''
+    Returns a 401 for unauthorized requests.
+    '''
     return render_template(
         'error.html', error=error, code=401,
         event=EVENT_DATA['name']
@@ -452,10 +459,10 @@ def unauthorized(error):
 def sudo():
     '''
     Administrator access.
-    Must pass the `X-Auth-Token` to access this route.
+    Must pass the `X-Auth-Token' to access this route.
     Please do not check-in to the repository or expose
     the token anywhere. For the current configuration,
-    `X-Auth-Token` is stored in APP_CONFIG['sudo']
+    `X-Auth-Token' is stored in APP_CONFIG['sudo']
     (file: ./config.json).
     '''
     header = request.headers.get('X-Auth-Token')
@@ -470,7 +477,7 @@ def sudo():
     if table not in ['users', 'events']:
         return jsonify({
             'error': '404',
-            'message': 'Unable fetch data from table `{}`.'.format(table)
+            'message': 'Unable fetch data from table `{}\'.'.format(table)
         })
 
     else:
