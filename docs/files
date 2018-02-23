@@ -25,10 +25,10 @@ CONFIGURATION
     * event:    The current event ID.
     * trackr:   The number of players to show on the leaderboard.
     * dbpath:   The path containing the initialized database.
-                (refer to the `DATABASE` section for more details)
-    * sudo:     This is the value for `X-Auth-Token`, a custom HTTP
+                (refer to the `DATABASE' section for more details)
+    * sudo:     This is the value for `X-Auth-Token', a custom HTTP
                 header for verifying administrator access.
-                (refer to `ADMINISTRATION` section for more details)
+                (refer to `ADMINISTRATION' section for more details)
     * secret:   The application secret. This is used to generate session
                 cookies, CSRF tokens for login and form submissions.
 
@@ -40,9 +40,9 @@ ADMINISTRATION
 
     [+] stats.py - Remote (read-only) administrator access for viewing events
                    and users on the current database. It issues an HTTP GET
-                   to the `/sudo` URL route on the server.
+                   to the `/sudo' URL route on the server.
 
-                   This script uses the `X-Auth-Token` custom HTTP header to
+                   This script uses the `X-Auth-Token' custom HTTP header to
                    verify credentials.
 
         usage: stats.py [-h] -s SERVER {users,events} ...
@@ -68,17 +68,17 @@ DATABASE
     user information and event data respectively.
 
     MANUAL CHANGES FOR USERS MUST BE DONE USING QUERIES ON THE DATABASE.
-    FOR EVENTS, `dba.py` can be used to update information.
+    FOR EVENTS, `dba.py' can be used to update information.
 
     BOTH OF THE ABOVE ACTIONS SHOULD BE RUN ON THE APPLICATION SERVER.
 
 
-    [+] db/* -      Usually contains `*.json` -- the event files, and `*.db` --
+    [+] db/* -      Usually contains `*.json' -- the event files, and `*.db' --
                     the database files. This application uses sqlite3 for
                     minimal overhead. It is recommended to use one database
                     per event.
 
-                    The value for `event`, `dbpath` in `config.json` must be
+                    The value for `event', `dbpath' in `config.json' must be
                     identical to the path/ID of the current event.
 
 
@@ -132,4 +132,4 @@ DATABASE
 
 NOTES
 
-    [+] A player will be logged out if he is flagged as `ban`.
+    [+] A player will be logged out if he is flagged as `ban'.
