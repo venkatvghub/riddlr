@@ -3,8 +3,8 @@ SETUP
 
 This application runs on Flask and uses Gunicorn as a WSGI HTTP Server.
 
-    [+] The minimum requirements include a GNU/Linux distrubution with
-        python-2.7 installed. Optionally, you can use virtualenv for
+    [+] The minimum requirements include a GNU/Linux distribution with
+        python-2.7 installed. Optionally, you can use `virtualenv' for
         testing and development.
 
 
@@ -40,15 +40,16 @@ SERVER
 
         ^C quits the server.
 
-    [+] For production, make sure that `debug` and `ENV_DEV` are set to false.
+    [+] For production, make sure that `debug' and `ENV_DEV'
+        are set to `false'.
 
         * To run a simple Flask server (with threading), set `threaded=True`
           in app.run() [Not recommended].
 
           $ python2.7 game.py
 
-          `^C` quits the server (in case of problems with threading,
-                               run `kill -{9,15} PID`).
+          `^C' quits the server (in case of problems with threading,
+                                run `kill -{9,15} [PID]').
 
 
         * To run the Flask application, behind a WSGI (Gunicorn, in this case),
@@ -62,5 +63,5 @@ SERVER
 CAVEATS
 -------
 
-    [+] Do no check in db/* or config.json into the git repository.
-        A better option would be to add it to gitignore.
+    [+] Do not check in `db/*' or `config.json' into the git repository.
+        A better option would be to add it to `.gitignore'.
