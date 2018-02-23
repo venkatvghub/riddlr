@@ -4,6 +4,11 @@
 dba.py: Database administration; CRUD operations on events and users.
 '''
 
+import json
+import time
+import sqlite3
+import argparse
+
 __author__ = "Srinidhi Kaushik"
 __copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
 __license__ = "MIT"
@@ -13,15 +18,9 @@ __email__ = "clickyotomy@users.noreply.github.com"
 __status__ = "Production"
 
 
-import json
-import time
-import sqlite3
-import argparse
-
-
 def init(dbpath):
     '''
-    Create a new database with `users` and `events` tables.
+    Create a new database with `users' and `events' tables.
     '''
     dbconn = sqlite3.connect(dbpath)
     cursor = dbconn.cursor()
@@ -68,9 +67,11 @@ def init(dbpath):
         '''
     )
 
-    print (
-        'Initialized an empty database `game` with `users`, `tables` at `{}`.'
-    ).format(dbpath)
+    print ((
+        'Initialized an empty database `game\' with `users\', and `events\' '
+        'tables at `{}\'.'
+        ''
+    )).format(dbpath)
 
     dbconn.commit()
     dbconn.close()
@@ -95,7 +96,9 @@ def load(dbpath, event, current=False):
         )
 
     except sqlite3.IntegrityError:
-        print 'The event `{}` already exists, updating it.'.format(event['id'])
+        print 'The event `{}\' already exists, updating it.'.format(
+            event['id']
+        )
         cursor.execute(
             '''
             UPDATE events

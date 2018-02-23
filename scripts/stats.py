@@ -3,14 +3,6 @@
 '''
 stats.py: Fetch stats from the database.
 '''
-__author__ = "Srinidhi Kaushik"
-__copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
-__license__ = "MIT"
-__version__ = "0.3"
-__maintainer__ = "Srinidhi Kaushik"
-__email__ = "clickyotomy@users.noreply.github.com"
-__status__ = "Production"
-
 
 import re
 import time
@@ -22,17 +14,25 @@ from operator import itemgetter
 import requests
 import tabulate
 
+__author__ = "Srinidhi Kaushik"
+__copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
+__license__ = "MIT"
+__version__ = "0.3"
+__maintainer__ = "Srinidhi Kaushik"
+__email__ = "clickyotomy@users.noreply.github.com"
+__status__ = "Production"
+
 
 # API URL of the server.
 API_URL = 'http://{}/sudo'.format
 
-# Fetch X-Auth-Token from `config.json`.
+# Fetch X-Auth-Token from `config.json'.
 APP_CONFIG_PATH = './config.json'
 
 
 def load_config():
     '''
-    Load configuration variables from `config.json`.
+    Load configuration variables from `config.json'.
     '''
     try:
         with open(APP_CONFIG_PATH, 'r') as config:
@@ -42,7 +42,7 @@ def load_config():
         exit(1)
 
 
-# Authentication token. Must be the same value as `sudo` in `config.json`.
+# Authentication token. Must be the same value as `sudo' in `config.json'.
 X_AUTH_TOKEN = {
     'X-Auth-Token': load_config()['sudo']
 }
@@ -122,8 +122,7 @@ def constraints(filters):
                 response = [_ for _ in response if not _['ban']]
 
             response = [_ for _ in response if
-                        filters['since'] <= _['timestamp'] <= filters['until']
-                        ]
+                        filters['since'] <= _['timestamp'] <= filters['until']]
 
             response = sorted(response, key=itemgetter('level'), reverse=True)
 
@@ -137,8 +136,8 @@ def constraints(filters):
 
             for item in response:
                 item['timestamp'] = datetime.utcfromtimestamp(
-                                        item['timestamp']
-                                    )
+                    item['timestamp']
+                )
             return response
 
 
@@ -148,15 +147,15 @@ def main():
     '''
     description = 'Fetch stats from the game database.'
     socket = 'hostname[:port] of the API server'
-    users = 'fetch data from the `users` table'
-    events = 'fetch data from the `events` table'
+    users = 'fetch data from the `users\' table'
+    events = 'fetch data from the `events\' table'
     reverse = 'list active users in reverse chronological order.'
     limit = 'limit the output to N users'
     ban = 'include banned users in the output'
     since = 'list users active since N (timestamp, UTC; default: epoch)'
     until = 'list users active until N (timestamp, UTC; default: now)'
     debug = 'enable debug logs'
-    user = 'A valid regular expression for filtering users (default: `.*``)'
+    user = 'A valid regular expression for filtering users (default: `.*\')'
 
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('-s', '--server', help=socket, required=True)
@@ -198,13 +197,13 @@ def main():
         for event in data:
             print json.dumps(json.loads(event['data']), indent=4)
             print 'current: {0}, timestamp: {1}.'.format(
-                                                    event['current'],
-                                                    event['timestamp']
+                event['current'], event['timestamp']
             )
     else:
         headers = data[0].keys() if len(data) else []
         print tabulate.tabulate(
-                [_.values() for _ in data], headers=headers, tablefmt='psql')
+            [_.values() for _ in data], headers=headers, tablefmt='psql'
+        )
     print 'count: {}.'.format(len(data))
 
 
