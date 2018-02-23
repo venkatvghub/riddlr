@@ -4,8 +4,8 @@
 # Source: https://gist.github.com/cirocosta/de576304f1432fad5b3a
 
 #### Default Configuration
-CONCURRENCY=4
-REQUESTS=100
+CONCURRENCY=1
+REQUESTS=10
 ADDRESS="http://localhost:8080/"
 
 show_help() {
