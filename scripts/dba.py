@@ -87,7 +87,7 @@ def load(dbpath, event, current=False):
     try:
         if current:
             cursor.execute(
-                'UPDATE events set current = ?', (not current)
+                'UPDATE events set current = ?', (not current,)
             )
 
         cursor.execute(
