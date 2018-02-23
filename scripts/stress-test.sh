@@ -1,9 +1,9 @@
 #! /bin/bash
 
-# Naive http server stress tester using cURL.
+# Naive HTTP server stress tester using cURL.
 # Source: https://gist.github.com/cirocosta/de576304f1432fad5b3a
 
-# Default Configuration
+#### Default Configuration
 CONCURRENCY=4
 REQUESTS=100
 ADDRESS="http://localhost:8080/"
