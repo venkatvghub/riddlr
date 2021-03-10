@@ -96,9 +96,9 @@ def load(dbpath, event, current=False):
         )
 
     except sqlite3.IntegrityError:
-        print 'The event `{}\' already exists, updating it.'.format(
+        print ('The event `{}\' already exists, updating it.'.format(
             event['id']
-        )
+        ))
         cursor.execute(
             '''
             UPDATE events
@@ -113,7 +113,7 @@ def load(dbpath, event, current=False):
 
     dbconn.commit()
     dbconn.close()
-    print 'Database updated.'
+    print ('Database updated.')
 
 
 def main():
@@ -141,7 +141,7 @@ def main():
     args = vars(parser.parse_args())
 
     if args['action'] == 'load' and args['from_file'] is None:
-        print '{}: error: argument -f/--from-file is required'.format(__file__)
+        print ('{}: error: argument -f/--from-file is required'.format(__file__))
         exit(1)
 
     if args['action'] == 'load':

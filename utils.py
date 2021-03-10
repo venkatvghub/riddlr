@@ -6,7 +6,9 @@ Helper modules for the web-app.
 
 import time
 import json
-from urlparse import urlparse, urljoin
+import urllib.parse
+from urllib.parse import urljoin
+#from urlparse import urlparse, urljoin
 
 import argon2
 
@@ -31,7 +33,7 @@ def load_config():
         with open(APP_CONFIG_PATH, 'r') as config:
             return json.loads(config.read())
     except (IOError, KeyError, ValueError) as err:
-        print ': '.join([type(err).__name__, str(err)]) + '.'
+        print (': '.join([type(err).__name__, str(err)]) + '.')
         exit(1)
 
 
@@ -71,7 +73,7 @@ def fetch_event_data(cursor, event):
 
         return json.loads(data[0])
     except (KeyError, ValueError):
-        print 'Ubale to fetch event data.'
+        print ('Ubale to fetch event data.')
         exit(1)
 
 

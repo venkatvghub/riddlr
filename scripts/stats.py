@@ -38,7 +38,7 @@ def load_config():
         with open(APP_CONFIG_PATH, 'r') as config:
             return json.loads(config.read())
     except (IOError, KeyError, ValueError) as err:
-        print ': '.join([type(err).__name__, str(err)]) + '.'
+        print(': '.join([type(err).__name__, str(err)]) + '.')
         exit(1)
 
 
@@ -50,29 +50,29 @@ X_AUTH_TOKEN = {
 
 def http_debug(response):
     '''
-    Print the request/response debug log.
+    print(the request/response debug log.)
     '''
-    print 'http-request\n{0}\n'.format('-' * len('http-request'))
-    print 'url ({0}): {1}'.format(response.request.method,
-                                  response.request.url)
-    print 'request-headers:'
-    print json.dumps(dict(response.request.headers), indent=4)
+    print('http-request\n{0}\n'.format('-' * len('http-request')))
+    print('url ({0}): {1}'.format(response.request.method,
+                                  response.request.url))
+    print('request-headers:')
+    print(json.dumps(dict(response.request.headers), indent=4))
     if response.request.method != 'GET':
         if response.request.body:
-            print 'request-payload:'
-            print json.dumps(json.loads(response.request.body), indent=4)
-    print '\nhttp-response\n{0}\n'.format('-' * len('http-response'))
-    print 'status-code: {0} {1}'.format(response.status_code, response.reason)
-    print 'url: {0}'.format(response.url)
-    print 'time-elapsed: {0}s'.format(response.elapsed.total_seconds())
-    print 'response-headers:'
-    print json.dumps(dict(response.headers), indent=4)
-    print 'response-content:'
+            print('request-payload:')
+            print(json.dumps(json.loads(response.request.body), indent=4))
+    print('\nhttp-response\n{0}\n'.format('-' * len('http-response')))
+    print('status-code: {0} {1}'.format(response.status_code, response.reason))
+    print('url: {0}'.format(response.url))
+    print('time-elapsed: {0}s'.format(response.elapsed.total_seconds()))
+    print('response-headers:')
+    print(json.dumps(dict(response.headers), indent=4))
+    print('response-content:')
     try:
-        print None if response.content is '' else json.dumps(response.json(),
+        print(None) if response.content is '' else json.dumps(response.json(),
                                                              indent=4)
     except (KeyError, ValueError):
-        print '{}'
+        print('{}')
 
 
 def fetch(host, table, debug=False):
@@ -95,12 +95,12 @@ def fetch(host, table, debug=False):
     except (ValueError, KeyError) as _error:
         error = ': '.join([type(_error).__name__, str(_error)])
         if debug:
-            print 'error:\n{0}\n{1}\n'.format('-' * len(error), error)
+            print('error:\n{0}\n{1}\n'.format('-' * len(error), error))
 
     except (requests.exceptions.RequestException) as _error:
         error = ': '.join([type(_error).__name__, str(_error)])
         if debug:
-            print 'error:\n{}'.format(error)
+            print('error:\n{}'.format(error))
 
     return None
 
@@ -195,16 +195,16 @@ def main():
 
     if args['table'] == 'events':
         for event in data:
-            print json.dumps(json.loads(event['data']), indent=4)
-            print 'current: {0}, timestamp: {1}.'.format(
+            print(json.dumps(json.loads(event['data']), indent=4))
+            print('current: {0}, timestamp: {1}.'.format(
                 event['current'], event['timestamp']
-            )
+            ))
     else:
         headers = data[0].keys() if len(data) else []
-        print tabulate.tabulate(
+        print(tabulate.tabulate(
             [_.values() for _ in data], headers=headers, tablefmt='psql'
-        )
-    print 'count: {}.'.format(len(data))
+        ))
+    print('count: {}.'.format(len(data)))
 
 
 if __name__ == '__main__':

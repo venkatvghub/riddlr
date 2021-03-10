@@ -61,7 +61,7 @@ def load_config():
         with open(APP_CONFIG_PATH, 'r') as config:
             return json.loads(config.read())
     except (IOError, KeyError, ValueError) as err:
-        print ': '.join([type(err).__name__, str(err)]) + '.'
+        print (': '.join([type(err).__name__, str(err)]) + '.')
         exit(1)
 
 
@@ -300,7 +300,7 @@ def level(path):
     Display, the question, validate answers, hints and increment user level.
     '''
     if is_banned(get_db().cursor(), current_user.id):
-        print 'here'
+        print ('here')
         return redirect('/logout')
 
     if not event_start(EVENT_DATA):
@@ -504,4 +504,4 @@ def ping():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=ENV_DEV, threaded=False)
+    app.run(host='0.0.0.0', port=8081, debug=ENV_DEV, threaded=False)
