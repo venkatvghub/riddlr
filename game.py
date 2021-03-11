@@ -6,9 +6,10 @@ game.py: Server-side logic for riddlr.
 
 import json
 import time
-import sqlite3
+#import sqlite3
+import psycopg2
 import itertools
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 import argon2
 
@@ -91,15 +92,37 @@ def get_db():
     '''
     Use database in the application cntext.
     '''
+    '''
     database = getattr(g, '_database', None)
     if database is None:
         database = g._database = sqlite3.connect(APP_CONFIG['dbpath'])
     return database
-
+         "db_name": "riddlr",
+     "db_host": "localhost",
+     "db_port": 5432,
+     "db_username": "postgres",
+     "db_password": "root",
+    '''
+    database = getattr(g, '_database', None)
+    if database is None:
+        try:
+            database = g._database = psycopg2.connect(
+                                    host=APP_CONFIG["db_host"],
+                                    database=APP_CONFIG["db_name"],
+                                    user=APP_CONFIG["db_username"],
+                                    password=APP_CONFIG["db_password"],
+                                    port=APP_CONFIG["db_port"])
+            return database
+        except Exception as exc:
+            print("Error getting connection:{0}".format(exc))
+    return database
 
 # Load the event data.
 with app.app_context():
-    EVENT_DATA = fetch_event_data(get_db().cursor(), APP_CONFIG['event'])
+    database = get_db()
+    #print("DSN:{0}\n".format(database.get_dsn_parameters()))
+    cursor = database.cursor()
+    EVENT_DATA = fetch_event_data(cursor, APP_CONFIG['event'])
 
 
 @app.teardown_appcontext
@@ -175,21 +198,22 @@ def register():
 
             cursor = get_db().cursor()
             if not user_exists(cursor, uname):
+                today = date.today()
                 cursor.execute(
                     '''
                     INSERT INTO users
                     (id, password, event, level,
                     email, phone, ban, timestamp)
                     VALUES
-                    (?, ?, ?, ?, ?, ?, ?, ?)
-                    ''',
-                    (
-                        uname, pword_hash, APP_CONFIG['event'], 1,
-                        request.form.get('email'),
-                        request.form.get('phone'),
-                        False, int(time.time())
-                    )
-                )
+                    (%(uname)s, %(hash)s, %(event)s, 1, %(email)s, %(phone)s, %(ban)s, %(time)s)
+                    ''', {'uname': uname, 'hash': pword_hash, 'event': APP_CONFIG['event'], 'email': request.form.get('email'), 'phone': request.form.get('phone'), 'ban': False, 'time': today})
+                    #(
+                    #    uname, pword_hash, APP_CONFIG['event'], 1,
+                    #    request.form.get('email'),
+                    #    request.form.get('phone'),
+                    #    False, int(time.time())
+                    #)
+                #)
                 get_db().commit()
             else:
                 reason = 'Username `{}\' is already taken.'.format(uname)

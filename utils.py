@@ -8,6 +8,7 @@ import time
 import json
 import urllib.parse
 from urllib.parse import urljoin
+from datetime import date
 #from urlparse import urlparse, urljoin
 
 import argon2
@@ -55,10 +56,11 @@ def user_exists(cursor, uname):
     '''
     Check if a user exists in the database.
     '''
-    return bool(cursor.execute(
-        'SELECT * FROM users WHERE event = ? AND id = ? AND ban = 0',
-        (EVENT, uname,)
-    ).fetchall()) or False
+    cursor.execute('SELECT * FROM users WHERE event = %(event)s AND id = %(username)s AND ban = %(ban)s', {'event': EVENT, 'username': uname, 'ban': False})
+    data = cursor.fetchall()
+    return bool(data) or False
+    #return bool(cursor.execute(
+    #    'SELECT * FROM users WHERE event = %(event)s AND id = %(username)s AND ban = false', {'event': EVENT, 'username': uname}).fetchall()) or False
 
 
 def fetch_event_data(cursor, event):
@@ -67,10 +69,10 @@ def fetch_event_data(cursor, event):
     If it doesn't exist, exit.
     '''
     try:
-        data = cursor.execute(
-            'SELECT data FROM events WHERE id = ?', (event,)
-        ).fetchone()
 
+        cursor.execute(
+                'SELECT data FROM events WHERE id = %(event)s', {'event': event})
+        data = cursor.fetchone()
         return json.loads(data[0])
     except (KeyError, ValueError):
         print ('Ubale to fetch event data.')
@@ -94,13 +96,12 @@ def validate_user(cursor, username, password):
     hasher = argon2.PasswordHasher()
     try:
         if user_exists(cursor, username):
-            credentials = cursor.execute(
+            cursor.execute(
                 '''
                 SELECT password FROM users
-                WHERE event = ? AND id = ? AND ban = 0
-                ''',
-                (EVENT, username,)
-            ).fetchone()
+                WHERE event = %(event)s AND id = %(username)s AND ban = %(ban)s
+                ''', {'event': EVENT, 'username': username, 'ban': False})
+            credentials = cursor.fetchone()
             return hasher.verify(credentials[0], password)
 
     except argon2.exceptions.VerifyMismatchError:
@@ -112,10 +113,11 @@ def get_user_level(cursor, username):
     Check the current level of the user.
     '''
     if user_exists(cursor, username):
-        return cursor.execute(
-            'SELECT level FROM users WHERE event = ? AND id = ?',
-            (EVENT, username,)
-        ).fetchone()[0]
+        cursor.execute(
+                'SELECT level FROM users WHERE event = %(event)s AND id = %(username)s', {'event': EVENT, 'username': username}
+        )
+        data = cursor.fetchone()
+        return data[0]
     return 0
 
 
@@ -195,13 +197,13 @@ def increment(dbconn, username, level):
     '''
     cursor = dbconn.cursor()
     if user_exists(cursor, username):
+        today = date.today()
         cursor.execute(
             '''
             UPDATE users
-            SET level = ?, timestamp = ?
-            WHERE id = ?
-            ''',
-            (level, int(time.time()), username)
+            SET level = %(level)s, timestamp = %(timestamp)s
+            WHERE id = %(username)s
+            ''', {'level': level, 'timestamp': today, 'username': username}
         )
 
     dbconn.commit()
@@ -211,15 +213,15 @@ def trackr(cursor, limit):
     '''
     Tracker method for the leaderboard.
     '''
-    return cursor.execute(
+    cursor.execute(
         '''
         SELECT id, level FROM users
-        WHERE event = ? AND ban = 0
+        WHERE event = %(event)s AND ban = %(ban)s
         ORDER BY level DESC, timestamp ASC
-        LIMIT ?
-        ''',
-        (EVENT, limit,)
-    ).fetchall()
+        LIMIT %(limit)s
+        ''', {'event': EVENT, 'limit': limit, 'ban': False}
+    )
+    return cursor.fetchall()
 
 
 def admin(cursor, table):
@@ -227,17 +229,20 @@ def admin(cursor, table):
     Fetch all the data from `users' database.
     '''
     if table == 'users':
-        return cursor.execute(
+        cursor.execute(
             '''
             SELECT id, level, email, phone, timestamp, ban
             FROM users
-            WHERE event = ?
+            WHERE event = %(event)s
             ORDER BY level DESC, timestamp ASC
-            ''',
-            (EVENT,)
-        ).fetchall()
+            ''', {'event': EVENT}
+        )
+        return cursor.fetchall()
+        #return data
     else:
-        return cursor.execute('SELECT * FROM events').fetchall()
+        cursor.execute('SELECT * FROM events')
+        return cursor.fetchall()
+        #return data
 
     return []
 
@@ -247,7 +252,8 @@ def is_banned(cursor, username):
     Check if a player is banned.
     '''
 
-    return bool(cursor.execute(
-        'SELECT id FROM users where event = ? AND id = ? AND ban = 1',
-        (EVENT, username,)
-    ).fetchone())
+    cursor.execute(
+        'SELECT id FROM users where event = %(event)s AND id = %(username)s AND ban = %(ban)s', {'event': EVENT, 'username': username, 'ban': True}
+    )
+    return bool(cursor.fetchone())
+    #return bool(data)

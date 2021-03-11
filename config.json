@@ -1,6 +1,11 @@
 {
     "event": "foo",
     "trackr": 20,
+    "db_name": "riddlr",
+    "db_host": "localhost",
+    "db_port": 5432,
+    "db_username": "postgres",
+    "db_password": "root",
     "dbpath": "db/event-foo.db",
     "sudo": "random-string",
     "secret": "another-random-string"
