@@ -10,6 +10,7 @@ import time
 import psycopg2
 import argparse
 from datetime import date
+import os
 
 __author__ = "Srinidhi Kaushik"
 __copyright__ = "Copyright (C) 2017 Srinidhi Kaushik"
@@ -19,17 +20,29 @@ __maintainer__ = "Srinidhi Kaushik"
 __email__ = "clickyotomy@users.noreply.github.com"
 __status__ = "Production"
 
+os.environ['DB_HOST'] = '127.0.0.1'
+os.environ['DB_PORT'] = '5432'
+os.environ['DB_USERNAME'] = 'riddlr'
+os.environ['DB_PASSWORD'] = 'riddlr'
+os.environ['DB_NAME'] = 'riddlr2'
 
 def load_config(config_path):
      '''
      Load configuration variables from `config.json'.
      '''
+     data = {}
      try:
          with open(config_path, 'r') as config:
-             return json.loads(config.read())
+             data = json.loads(config.read())
      except (IOError, KeyError, ValueError) as err:
          print (': '.join([type(err).__name__, str(err)]) + '.')
          exit(1)
+     for key, value in data.items():
+         if isinstance(value, str) and value.startswith("$"):
+             k = value.strip("$")
+             data[key] = os.getenv(k)
+     return data
+
 
 # Application configuration variables.
 APP_CONFIG = {}

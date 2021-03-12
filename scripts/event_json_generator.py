@@ -26,7 +26,7 @@ for item in data:
             }
     if media != '':
         tmp['media'] = {
-                        'url': media,
+                        'url': '/static/images/{0}.jpg'.format(index),
                         'type': 'img'
                         }
     else:
@@ -37,12 +37,12 @@ foo_json = {
             'id': 'foo',
             'start': 1400000000,
             "intro": "A treasure hunt is one of many different types of games with one or more players who try to find hidden objects or places by following a series of clues. Treasure hunt games may be an indoor or outdoor activity.      Outdoors they can be played in a garden or the treasure could be located anywhere around the world.",
-            "social": "https://example.com/example-company",
-            "host": "example-company",
+            "social": "https://razorpay.com",
+            "host": "Razorpay Platform Offsite: 2021",
             "faq": "https://example.com/example-oth/faq",
             "discuss": "https://example.com/example-oth/forums",
             'finish': '',
-            'name': 'Foo-Bar : RZP Platform Offsite Treasure Hunt',
+            'name': 'Foo-Bar : RZP Platform Offsite: Virtual Treasure Hunt',
             'levels': formatted
             }
 print(json.dumps(foo_json))

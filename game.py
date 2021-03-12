@@ -10,6 +10,7 @@ import time
 import psycopg2
 import itertools
 from datetime import datetime, timedelta, date
+import os
 
 import argon2
 
@@ -42,6 +43,12 @@ __status__ = "Production"
 # Application configuration path.
 APP_CONFIG_PATH = './config.json'
 
+#os.environ['DB_HOST'] = 'localhost'
+#os.environ['DB_PORT'] = '5432'
+#os.environ['DB_USERNAME'] = 'postgres'
+#os.environ['DB_PASSWORD'] = 'root'
+#os.environ['DB_NAME'] = 'riddlr'
+
 
 # Authenticated users.
 class User(UserMixin):
@@ -58,12 +65,18 @@ def load_config():
     '''
     Load configuration variables from `config.json'.
     '''
+    data = {}
     try:
         with open(APP_CONFIG_PATH, 'r') as config:
-            return json.loads(config.read())
+            data = json.loads(config.read())
     except (IOError, KeyError, ValueError) as err:
         print (': '.join([type(err).__name__, str(err)]) + '.')
         exit(1)
+    for key, value in data.items():
+        if isinstance(value, str) and value.startswith("$"):
+            k = value.strip("$")
+            data[key] = os.getenv(k)
+    return data
 
 
 # Variable for development environemnt (set to `False' in production).
